@@ -9,5 +9,5 @@ setup(
     author='Kai Stullich',
     author_email='kairstullich@gmail.com',
     description='A chatbot for getting weather information and if you just want to have some small talk.',
-    requires=['flask', 'rivescript']
+    requires=['flask', 'rivescript', 'pyowm']
 )
