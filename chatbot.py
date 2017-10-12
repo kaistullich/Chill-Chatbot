@@ -1,5 +1,7 @@
 import os
 import re
+import logging
+from logging import FileHandler, Formatter
 
 from flask import Flask, render_template, jsonify, request
 from rivescript import RiveScript
@@ -12,6 +14,16 @@ app = Flask(__name__)
 bot = RiveScript()
 bot.load_directory(os.path.join(os.getcwd(), 'brain'))
 bot.sort_replies()
+
+# setup log file
+file_handler = FileHandler('error_log.log')
+file_handler.setLevel(logging.ERROR)
+file_handler.setFormatter(
+    Formatter('%(asctime)s,%(msecs)d %(levelname)-5s [%(filename)s:%(lineno)d] %(message)s',
+              datefmt='%d-%m-%Y:%H:%M:%S'
+              )
+)
+app.logger.addHandler(file_handler)
 
 
 @app.route('/')
@@ -28,7 +40,6 @@ def reply():
 
     # TODO: continue integrating weather stuff
     if weather_regex.search(user_msg):
-        print('weather and in, inside of string')
         # get all the characters after "in" and remove whitespace
         get_city = user_msg[user_msg.find('in') + 2:].strip()
         w = Weather()
