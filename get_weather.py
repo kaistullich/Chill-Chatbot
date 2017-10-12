@@ -4,7 +4,7 @@ import json
 from urllib.parse import urlencode
 
 
-class GetWeather:
+class Weather:
     def __init__(self):
         self.baseurl = "https://query.yahooapis.com/v1/public/yql?"
         self.format = "&format=json"
