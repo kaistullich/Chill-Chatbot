@@ -45,6 +45,10 @@ def reply():
         w = Weather()
         w.get_woeid(get_city)
         weather_data = w.get_weather()
+        # TODO: Look at FIXME #1
+        # five_day = w.get_5day_forecast()
+        # return jsonify({"weather_data": weather_data, 'five_day': five_day})
+
         return jsonify({"weather_data": weather_data})
     else:
         botreply = bot.reply('localuser', user_msg)
