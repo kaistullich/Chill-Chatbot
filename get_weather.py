@@ -31,6 +31,7 @@ class Weather:
         return weather_data
 
     def get_5day_forecast(self):
+        # FIXME #1: for some reason JS can't loop through this list w/ dict (i.e. [{}, {}, {}]) this func isn't being used
         weather_data = self.get_weather()
         five_day_forecast = weather_data['query']['results']['channel']['item']['forecast']
 
