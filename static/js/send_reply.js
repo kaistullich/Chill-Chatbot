@@ -1,7 +1,7 @@
-let btn = $('#btn');
 let bot = $('#bot_reply');
 let msgDiv = $('.display-msgs');
 let userInput = $('#userInput');
+let chatBox = document.getElementById("box");
 
 userInput.keypress((e) => {
     // Grab the `return` or `enter` keys
@@ -11,7 +11,11 @@ userInput.keypress((e) => {
         let inp = userInput.val();
         let msg = {userMsg: inp};
 
+        // append the inputted message to the chat area
         msgDiv.append('<div class="msg_bubble_user"><b>You:   </b>' + inp + '</div>');
+        // Auto scroll when messages exceed the height of the box
+        chatBox.scrollTop = chatBox.scrollHeight;
+        // clear user input
         userInput.val('');
 
         $.ajax({
@@ -23,7 +27,7 @@ userInput.keypress((e) => {
                 if (recvWeatherData.weather_data) {
                     fiveDayWeather(recvWeatherData)
                 } else {
-                    bot.text(recvWeatherData.reply);
+                    msgDiv.append('<div class="msg_bubble_bot"><b>Bot:   </b>'+ recvWeatherData.reply +'</div>')
                 }
             },
             error: (err) => {
@@ -47,10 +51,11 @@ function fiveDayWeather(weather) {
         console.log(`Text for today: ${fiveDayForecast[i]['text']}`)
     }
 
+    // WeatherIcon.add('day1', WeatherIcon.SUN, {mode:WeatherIcon.DAY, stroke:true, shadow:true, animated:true});
+    // WeatherIcon.add('day2', WeatherIcon.LIGHTRAINSUN, {mode:WeatherIcon.NIGHT, stroke:true, shadow:true, animated:true});
+    // WeatherIcon.add('day3', WeatherIcon.LIGHTRAINTHUNDERSUN); // no parameters
 
-    WeatherIcon.add('day1', WeatherIcon.SUN, {mode:WeatherIcon.DAY, stroke:true, shadow:true, animated:true});
-    WeatherIcon.add('day2', WeatherIcon.LIGHTRAINSUN, {mode:WeatherIcon.NIGHT, stroke:true, shadow:true, animated:true});
-    WeatherIcon.add('day3', WeatherIcon.LIGHTRAINTHUNDERSUN); // no parameters
-
-    msgDiv.append('<div class="msg_bubble_bot"><b>Bot:   </b>'+ weather +'</div>')
+    msgDiv.append('<div class="msg_bubble_bot"><b>Bot:   </b>'+ weather +'</div>');
+    // Auto scroll when messages exceed the height of the box
+    chatBox.scrollTop = chatBox.scrollHeight;
 }
