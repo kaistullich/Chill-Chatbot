@@ -1,0 +1,33 @@
+#box {
+    margin-top: 20px;
+    border: solid #66becb 2px;
+    border-radius: 25px;
+    padding: 15px;
+    margin-bottom: 15px;
+    height: 500px;
+    overflow: auto;
+}
+
+div.msg_bubble_user {
+    background-color: #cdcdcd;
+    padding: 5px 10px;
+    border-radius: 10px;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+div.msg_bubble_bot {
+    background-color: #dddc78;
+    padding: 5px 10px;
+    border-radius: 10px;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+label {
+    margin-top: 20px;
+}
+
+#userInput {
+    padding-top: 20px;
+}
