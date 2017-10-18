@@ -1,26 +1,36 @@
 let btn = $('#btn');
 let bot = $('#bot_reply');
+let msgDiv = $('.display-msgs');
+let userInput = $('#userInput');
 
-btn.click(() => {
-    let inp = $('#userInput').val();
-    let msg = {userMsg: inp};
+userInput.keypress((e) => {
+    // Grab the `return` or `enter` keys
+    let code = e.keyCode || e.which;
+    // If the key `return` or `enter` is pressed
+    if (code === 13) {
+        let inp = userInput.val();
+        let msg = {userMsg: inp};
 
-    $.ajax({
-        url: '/reply',
-        type: 'POST',
-        data: JSON.stringify(msg, null, 2),
-        contentType: 'application/json;charset=UTF-8',
-        success: (recvWeatherData) => {
-            if (recvWeatherData.weather_data) {
-                fiveDayWeather(recvWeatherData)
-            } else {
-                bot.text(recvWeatherData.reply);
+        msgDiv.append('<div class="msg_bubble_user"><b>You:   </b>' + inp + '</div>');
+        userInput.val('');
+
+        $.ajax({
+            url: '/reply',
+            type: 'POST',
+            data: JSON.stringify(msg, null, 2),
+            contentType: 'application/json;charset=UTF-8',
+            success: (recvWeatherData) => {
+                if (recvWeatherData.weather_data) {
+                    fiveDayWeather(recvWeatherData)
+                } else {
+                    bot.text(recvWeatherData.reply);
+                }
+            },
+            error: (err) => {
+                console.log(err)
             }
-        },
-        error: (err) => {
-            console.log(err)
-        }
-    })
+        })
+    }
 });
 
 
@@ -42,5 +52,5 @@ function fiveDayWeather(weather) {
     WeatherIcon.add('day2', WeatherIcon.LIGHTRAINSUN, {mode:WeatherIcon.NIGHT, stroke:true, shadow:true, animated:true});
     WeatherIcon.add('day3', WeatherIcon.LIGHTRAINTHUNDERSUN); // no parameters
 
-    bot.text(weather);
+    msgDiv.append('<div class="msg_bubble_bot"><b>Bot:   </b>'+ weather +'</div>')
 }
