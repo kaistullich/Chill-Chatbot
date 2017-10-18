@@ -25,16 +25,18 @@ btn.click(() => {
 
 
 function fiveDayWeather(weather) {
-    // 5 day forecast
-    let fiveDay = weather.weather_data['query']['results']['channel']['item']['forecast'];
-    // loop through array
-    for (let i = 0; i < fiveDay.length; i++) {
-        console.log(`High today: ${fiveDay[i].high}`)
-    }
     // grab current temperature
     let curTemp = weather.weather_data.query.results.channel.item['condition'].temp;
     // grab condition description (i.e. sunny, cloudy)
     let cond = weather.weather_data.query.results.channel.item['condition']['text'];
+
+    // 5 day forecast
+    let fiveDayForecast = weather.five_day;
+    // loop through array
+    for (let i = 0; i < fiveDayForecast.length; i++) {
+        console.log(`Text for today: ${fiveDayForecast[i]['text']}`)
+    }
+
 
     WeatherIcon.add('day1', WeatherIcon.SUN, {mode:WeatherIcon.DAY, stroke:true, shadow:true, animated:true});
     WeatherIcon.add('day2', WeatherIcon.LIGHTRAINSUN, {mode:WeatherIcon.NIGHT, stroke:true, shadow:true, animated:true});
