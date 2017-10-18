@@ -1,3 +1,6 @@
+// TODO: make the individual msg bubbles shorter
+// FIXME #2: when a user enters really long text it goes off screen
+
 let bot = $('#bot_reply');
 let msgDiv = $('.display-msgs');
 let userInput = $('#userInput');
@@ -27,7 +30,8 @@ userInput.keypress((e) => {
                 if (recvWeatherData.weather_data) {
                     fiveDayWeather(recvWeatherData)
                 } else {
-                    msgDiv.append('<div class="msg_bubble_bot"><b>Bot:   </b>'+ recvWeatherData.reply +'</div>')
+                    msgDiv.append('<div class="msg_bubble_bot right-align"><b>Bot:   </b>'+ recvWeatherData.reply +'</div>');
+                    chatBox.scrollTop = chatBox.scrollHeight;
                 }
             },
             error: (err) => {
@@ -55,7 +59,7 @@ function fiveDayWeather(weather) {
     // WeatherIcon.add('day2', WeatherIcon.LIGHTRAINSUN, {mode:WeatherIcon.NIGHT, stroke:true, shadow:true, animated:true});
     // WeatherIcon.add('day3', WeatherIcon.LIGHTRAINTHUNDERSUN); // no parameters
 
-    msgDiv.append('<div class="msg_bubble_bot"><b>Bot:   </b>'+ weather +'</div>');
+    msgDiv.append('<div class="msg_bubble_bot right-align"><b>Bot:   </b>'+ weather +'</div>');
     // Auto scroll when messages exceed the height of the box
     chatBox.scrollTop = chatBox.scrollHeight;
 }
