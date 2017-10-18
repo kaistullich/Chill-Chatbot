@@ -1,7 +1,8 @@
-import requests
 import json
-
 from urllib.parse import urlencode
+
+import requests
+from bs4 import BeautifulSoup
 
 
 class Weather:
@@ -31,8 +32,27 @@ class Weather:
         return weather_data
 
     def get_5day_forecast(self):
-        # FIXME #1: for some reason JS can't loop through this list w/ dict (i.e. [{}, {}, {}]) this func isn't being used
         weather_data = self.get_weather()
         five_day_forecast = weather_data['query']['results']['channel']['item']['forecast']
 
         return five_day_forecast
+
+    def weather_codes(self):
+        url = 'https://developer.yahoo.com/weather/documentation.html'
+        r = requests.get(url)
+
+        if r.status_code == 200:
+            html = r.text
+            soup = BeautifulSoup(html, 'lxml')
+            table = soup.find('table', {'id': 'codetable'})
+            rows = table.find_all('tr')
+
+            codes = {}
+            for row in rows[1::]:
+                cols = row.find_all('td')
+                code = cols[0].text
+                desc = cols[1].text
+                codes[code] = desc
+            return codes
+        else:
+            raise ConnectionError(f'Could not connect to the URL "{url}"')
