@@ -2,7 +2,9 @@
 
 ## Introduction
 
-> This small chatbot allows users to have conversations about anything with the bot. The user is also able to ask about the weather for any given city, and will also (...in the future) be able to ask for currency exchange, movie times & reviews, and many other features I hope to implement. 
+This small chatbot allows users to have conversations about anything with the bot. The user is also able 
+to ask about the weather for any given city, and will also (...in the future) be able to ask for currency exchange, 
+movie times & reviews, and many other features I hope to implement. 
 
 
 ## Installation
