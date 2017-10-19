@@ -1,5 +1,3 @@
-// TODO: make the individual msg bubbles shorter
-
 let bot = $('#bot_reply');
 let msgDiv = $('.display-msgs');
 let userInput = $('#userInput');
