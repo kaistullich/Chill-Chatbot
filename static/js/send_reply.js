@@ -1,5 +1,4 @@
 // TODO: make the individual msg bubbles shorter
-// FIXME #2: when a user enters really long text it goes off screen
 
 let bot = $('#bot_reply');
 let msgDiv = $('.display-msgs');
@@ -15,7 +14,7 @@ userInput.keypress((e) => {
         let msg = {userMsg: inp};
 
         // append the inputted message to the chat area
-        msgDiv.append('<div class="msg_bubble_user"><b>You:   </b>' + inp + '</div>');
+        msgDiv.append('<div class="msg_bubble_user">' + inp + '</div>');
         // Auto scroll when messages exceed the height of the box
         chatBox.scrollTop = chatBox.scrollHeight;
         // clear user input
@@ -30,7 +29,7 @@ userInput.keypress((e) => {
                 if (recvWeatherData.weather_data) {
                     fiveDayWeather(recvWeatherData)
                 } else {
-                    msgDiv.append('<div class="msg_bubble_bot right-align"><b>Bot:   </b>'+ recvWeatherData.reply +'</div>');
+                    msgDiv.append('<div class="msg_bubble_bot right-align">'+ recvWeatherData.reply +'</div>');
                     chatBox.scrollTop = chatBox.scrollHeight;
                 }
             },
@@ -59,7 +58,7 @@ function fiveDayWeather(weather) {
     // WeatherIcon.add('day2', WeatherIcon.LIGHTRAINSUN, {mode:WeatherIcon.NIGHT, stroke:true, shadow:true, animated:true});
     // WeatherIcon.add('day3', WeatherIcon.LIGHTRAINTHUNDERSUN); // no parameters
 
-    msgDiv.append('<div class="msg_bubble_bot right-align"><b>Bot:   </b>'+ weather +'</div>');
+    msgDiv.append('<div class="msg_bubble_bot right-align">'+ weather +'</div>');
     // Auto scroll when messages exceed the height of the box
     chatBox.scrollTop = chatBox.scrollHeight;
 }
