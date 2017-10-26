@@ -60,7 +60,8 @@ class Weather:
 
         return five_day_forecast
 
-    def weather_codes(self):
+    @staticmethod
+    def weather_codes():
         """
         This method scrapes the Yahoo YQL documentation for all the weather status codes. There
         are 48 weather codes. Each code matches a description (i.e. 32 --> "sunny") and each
